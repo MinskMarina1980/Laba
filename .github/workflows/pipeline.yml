@@ -12,11 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build images
-        run: docker build -t laba /home/user/Laba/python
+        run: sudo docker build -t laba /home/user/Laba/python
 
   deploy:
     runs-on: self-hosted
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - name: Deploy container
-        run: docker run -d -p 8080:80 --name laba laba
+        run: sudo docker run -d -p 8080:80 --name laba laba
